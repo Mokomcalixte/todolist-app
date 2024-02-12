@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout du code') {
+            steps {
+                // Récupérer le code depuis GitHub
+                git url: 'https://github.com/Mokomcalixte/todolist-app.git'
+            }
+        }
+        
+        stage('Installation des dépendances') {
+            steps {
+                // Installer les dépendances avec npm
+                sh 'npm install'
+            }
+        }
+        
+        stage('Construction de l\'application') {
+            steps {
+                // Construire l'application React
+                sh 'npm run build'
+            }
+        }
+        
+        stage('Tests de l\'application') {
+            steps {
+                // Exécuter les tests de l'application React
+                sh 'npm test'
+            }
+        }
+        
+        // stage('Déploiement de l\'application') {
+        //     steps {
+        //         // Exemple : Déploiement sur un serveur web
+        //         sh 'scp -r build utilisateur@serveur:/chemin/vers/deploiement'
+        //     }
+        // }
+    }
+}
